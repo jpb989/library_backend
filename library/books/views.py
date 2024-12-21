@@ -150,6 +150,8 @@ class ReturnBookView(APIView):
 
 
 class ReportView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request):
         # Get the latest report file
         reports_dir = "reports/"

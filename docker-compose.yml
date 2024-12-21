@@ -36,6 +36,34 @@ services:
     networks:
       - app-network
 
+
+  celery:
+    build: ./library/
+    command: celery -A library worker --loglevel=info
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./library:/app
+    environment:
+      - MEDIA_DOMAIN=${MEDIA_DOMAIN}
+    networks:
+      - app-network
+
+  celery-beat:
+    build: ./library/
+    command: celery -A library beat --loglevel=info
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./library:/app
+    environment:
+      - MEDIA_DOMAIN=${MEDIA_DOMAIN}
+    networks:
+      - app-network
+
+
 networks:
   app-network:
     driver: bridge
