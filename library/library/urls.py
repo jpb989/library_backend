@@ -29,10 +29,14 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path("api/", include("books.urls")),
 
+    path("api/books/", include("books.urls")),
+    path("api/author/", include("author.urls")),
+    path("api/borrow/", include("borrow.urls")),
+    path("api/reports/", include("report.urls")),
 
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-schema'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc-schema'),

@@ -1,7 +1,9 @@
 import json
 from datetime import datetime
 from celery import shared_task
-from books.models import Author, Book, BorrowRecord
+from author.models import Author 
+from books.models import Book
+from borrow.models import BorrowRecord
 
 @shared_task
 def generate_report():
